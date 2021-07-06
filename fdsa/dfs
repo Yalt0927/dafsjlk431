@@ -1,0 +1,46 @@
+def Maqueen_Stop():
+    maqueen.motor_run(maqueen.Motors.ALL, maqueen.Dir.CW, 0)
+
+def on_received_number(receivedNumber):
+    if receivedNumber == 0:
+        Maqueen_Forward()
+    elif receivedNumber == 1:
+        Maqueen_Backward()
+    elif receivedNumber == 2:
+        Maqueen_Left()
+    elif receivedNumber == 3:
+        Maqueen_Right()
+    elif receivedNumber == 4:
+        Maqueen_Stop()
+    elif receivedNumber == 5:
+        Maqueen_Sound()
+    elif receivedNumber == 6:
+        Maqueen_Led_Off()
+    elif receivedNumber == 7:
+        Maqueen_Led_On()
+radio.on_received_number(on_received_number)
+
+def Maqueen_Forward():
+    maqueen.motor_run(maqueen.Motors.ALL, maqueen.Dir.CW, 150)
+def Maqueen_Led_Off():
+    strip.clear()
+def Maqueen_Right():
+    maqueen.motor_run(maqueen.Motors.M2, maqueen.Dir.CW, 150)
+def Maqueen_Led_On():
+    strip.show()
+def Maqueen_Sound():
+    for index in range(4):
+        music.ring_tone(523)
+        basic.pause(300)
+        music.ring_tone(659)
+        basic.pause(300)
+    music.stop_all_sounds()
+def Maqueen_Left():
+    maqueen.motor_run(maqueen.Motors.M1, maqueen.Dir.CW, 150)
+def Maqueen_Backward():
+    maqueen.motor_run(maqueen.Motors.ALL, maqueen.Dir.CCW, 150)
+strip: neopixel.Strip = None
+radio.set_group(3)
+strip = neopixel.create(DigitalPin.P0, 4, NeoPixelMode.RGB)
+range2 = strip.range(0, 1)
+range22 = strip.range(2, 3)
